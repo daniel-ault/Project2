@@ -40,8 +40,8 @@ public class GUI extends JFrame {
     public GUI()
     {
         setTitle("All sorts of sorts");
-        // experiment with size
-        setSize(500, 500);
+        // this size allows all the pixels to be 4x4 -- at least in linux
+        setSize(405, 528);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -122,15 +122,22 @@ public class GUI extends JFrame {
             else if (source == buttonQuick) {
                 // quicksort
             }
+            else if (source == buttonMonkey) {
+                // monkey sort
+            }
             else if (source == buttonShuffle) {
                 // shuffle elements
-            }
-            else if (source == buttonBubble) {
-                // bubble sort
+                printSize();
             }
         }
     }
     
+    public void printSize() {
+        int width = this.getWidth();
+        int height = this.getHeight();
+        
+        System.out.println("Width: " + width + "  Height: " + height);
+    }
     
     public static void main(String[] args)
     {
