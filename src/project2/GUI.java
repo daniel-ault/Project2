@@ -8,6 +8,8 @@ package project2;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +26,7 @@ import javax.swing.JPanel;
 public class GUI extends JFrame {
     private final int ARRAY_SIZE = 100;
     
-    private Pixel[][] pixels = new Pixel[ARRAY_SIZE][ARRAY_SIZE];
+    private PanelDraw panelDraw = new PanelDraw();
     private JButton buttonBubble = new JButton("Bubble Sort");
     private JButton buttonSelection = new JButton("Selection Sort");
     private JButton buttonInsertion = new JButton("Insertion Sort");
@@ -67,15 +69,8 @@ public class GUI extends JFrame {
         JPanel c = new JPanel();
         c.setLayout(new BorderLayout());
         
-        // create the pixel objects, and add them to a pixelContainer
-        JPanel pixelContainer = new JPanel();
-        pixelContainer.setLayout(new GridLayout(pixels.length, pixels[0].length));
-        for (int i=0; i<pixels.length; i++) {
-            for (int j=0; j<pixels[i].length; j++) {
-                pixels[i][j] = new Pixel();
-                pixelContainer.add(pixels[i][j]);
-            }// end for j
-        }// end for i
+        // initialize the draw Panel, and draw the array on it
+        
         
         JPanel buttonContainer = new JPanel();
         buttonContainer.setLayout(new GridLayout(3, 3));
@@ -91,35 +86,14 @@ public class GUI extends JFrame {
         
         // add the elements to the content pane
         c.add(buttonContainer, BorderLayout.SOUTH);
-        c.add(pixelContainer, BorderLayout.CENTER);
+        c.add(panelDraw, BorderLayout.CENTER);
         c.add(labelTop, BorderLayout.NORTH);
         
         //draw the list
-        drawArray();
+        //drawArray();
         
         setContentPane(c);
         setVisible(true);
-    }
-    
-    
-    private void drawArray()
-    {
-        for (int i=0; i<ARRAY_SIZE; i++) {
-            drawBar(i);
-        }
-    }
-    
-    private void drawBar(int n)
-    {
-        for (int i=0; i<ARRAY_SIZE; i++) {
-            Color color;
-            if (ARRAY_SIZE-i <= array[n])
-                color = Color.BLACK;
-            else
-                color = Color.WHITE;
-            pixels[i][n].setColor(color);
-            pixels[i][n].repaint();
-        }
     }
     
     private void shuffleArray(int[] a)
@@ -135,6 +109,34 @@ public class GUI extends JFrame {
         }
     }
     
+    private class PanelDraw extends JPanel
+    {
+        @Override
+        public void paintComponent(Graphics g)
+        {
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;
+            drawArray(g2);
+        }
+        
+        private void drawArray(Graphics2D g)
+        {
+            for (int i=0; i<ARRAY_SIZE; i++) {
+                drawBar(i, g);
+            }
+        }
+
+        private void drawBar(int n, Graphics2D g)
+        {
+            //fill color
+            g.setColor(Color.BLUE);
+            g.fillRect(n*4, ARRAY_SIZE*4-array[n]*4, 4, array[n]*4);
+            //draw black outline
+            g.setColor(Color.BLACK);
+            g.drawRect(n*4, ARRAY_SIZE*4-array[n]*4, 4, array[n]*4);
+            
+        }
+    }
     
     private class ButtonHandler implements ActionListener
     {
@@ -169,7 +171,9 @@ public class GUI extends JFrame {
             }
             else if (source == buttonShuffle) {
                 shuffleArray(array);
-                drawArray();
+                panelDraw.repaint();
+                
+                //drawArray();
             }
         }
     }
