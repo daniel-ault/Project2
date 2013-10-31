@@ -7,9 +7,11 @@
 package project2;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -39,6 +41,9 @@ public class GUI extends JFrame {
     
     public GUI()
     {
+        for (int i=1; i<=ARRAY_SIZE; i++)
+            array[i-1] = i;
+        
         setTitle("All sorts of sorts");
         // this size allows all the pixels to be 4x4 -- at least in linux
         setSize(405, 528);
@@ -89,8 +94,45 @@ public class GUI extends JFrame {
         c.add(pixelContainer, BorderLayout.CENTER);
         c.add(labelTop, BorderLayout.NORTH);
         
+        //draw the list
+        drawArray();
+        
         setContentPane(c);
         setVisible(true);
+    }
+    
+    
+    private void drawArray()
+    {
+        for (int i=0; i<ARRAY_SIZE; i++) {
+            drawBar(i);
+        }
+    }
+    
+    private void drawBar(int n)
+    {
+        for (int i=0; i<ARRAY_SIZE; i++) {
+            Color color;
+            if (ARRAY_SIZE-i <= array[n])
+                color = Color.BLACK;
+            else
+                color = Color.WHITE;
+            pixels[i][n].setColor(color);
+            pixels[i][n].repaint();
+        }
+    }
+    
+    private void shuffleArray(int[] a)
+    {
+        Random rnd = new Random();
+        for (int i=a.length-1; i>0; i--)
+        {
+            int index = rnd.nextInt(i+1);
+            // simple swap
+            int n = a[index];
+            a[index] = a[i];
+            a[i] = n;
+        }
     }
     
     
@@ -126,8 +168,8 @@ public class GUI extends JFrame {
                 // monkey sort
             }
             else if (source == buttonShuffle) {
-                // shuffle elements
-                printSize();
+                shuffleArray(array);
+                drawArray();
             }
         }
     }
