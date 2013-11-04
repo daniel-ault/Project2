@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -109,7 +110,7 @@ public class GUI extends JFrame {
         }
     }
     
-    private class PanelDraw extends JPanel
+    public class PanelDraw extends JPanel
     {
         @Override
         public void paintComponent(Graphics g)
@@ -147,6 +148,8 @@ public class GUI extends JFrame {
             
             if (source == buttonBubble) {
                 // bubble sort
+                (new BubbleSortThread(array, panelDraw)).execute();
+                panelDraw.repaint();
             }
             else if (source == buttonSelection) {
                 // selection sort
@@ -184,6 +187,64 @@ public class GUI extends JFrame {
         
         System.out.println("Width: " + width + "  Height: " + height);
     }
+    
+    
+    /*
+    private class BubbleSortThread extends SwingWorker<Void, int[]> {
+    
+        //int[] array;
+        static final int THREAD_DELAY = 5;
+
+        //private PanelDraw panelDraw;
+        /*
+        public BubbleSortThread(int[] array, PanelDraw panelDraw) 
+        {
+            this.array = array;
+            this.panelDraw = panelDraw;
+        }
+
+        public void bubbleSort(int[] array)
+        {
+
+        }
+        */
+    /*
+        @Override
+        protected Void doInBackground() throws Exception {
+            // perform array.length passes through the array
+            for (int j = 0; j < array.length; j++) {
+                    // for each pass, compare elements 0 and 1, 1 and 2, 2 and 3, etc., swapping them
+                    //  if the value at the smaller index is bigger
+                    // each pass "bubbles up" the largest element to the end of the array
+                for (int i = 0; i < array.length - 1; i++) {
+                    if (array[i] > array[i+1]) {
+                        int temp = array[i];
+                        array[i] = array[i+1];
+                        array[i+1] = temp;
+                    }
+                    publish(array);
+                    try {
+                        Thread.sleep(THREAD_DELAY);
+                    } catch (InterruptedException e) { }
+                }// end for i
+            }// end for j
+
+            return null;
+        }
+
+        /**
+         *
+         * @param list
+         */
+    /*
+        protected void process(java.util.List<int[]> list)
+        {
+            //tf.setText("" + list.get(list.size() - 1));
+            //array = list.get(list.size() - 1);
+            panelDraw.repaint();
+        }
+    }
+*/
     
     public static void main(String[] args)
     {
