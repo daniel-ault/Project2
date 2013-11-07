@@ -37,6 +37,7 @@ public class GUI extends JFrame {
     private JButton buttonQuick = new JButton("Quicksort");
     private JButton buttonMonkey = new JButton("Monkey Sort");
     private JButton buttonShuffle = new JButton("Shuffle");
+    private JButton buttonCancel = new JButton("Cancel");
     
     int[] array = new int[ARRAY_SIZE];
     
