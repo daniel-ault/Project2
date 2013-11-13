@@ -28,6 +28,7 @@ public class GUI extends JFrame {
     private final int ARRAY_SIZE = 100;
     
     private PanelDraw panelDraw = new PanelDraw();
+    //private Pixel[][] pixels = new Pixel[ARRAY_SIZE][ARRAY_SIZE];
     private JButton buttonBubble = new JButton("Bubble Sort");
     private JButton buttonSelection = new JButton("Selection Sort");
     private JButton buttonInsertion = new JButton("Insertion Sort");
@@ -71,9 +72,9 @@ public class GUI extends JFrame {
         JPanel c = new JPanel();
         c.setLayout(new BorderLayout());
         
+
         // initialize the draw Panel, and draw the array on it
-        
-        
+
         JPanel buttonContainer = new JPanel();
         buttonContainer.setLayout(new GridLayout(3, 3));
         buttonContainer.add(buttonBubble);
@@ -176,7 +177,6 @@ public class GUI extends JFrame {
             else if (source == buttonShuffle) {
                 shuffleArray(array);
                 panelDraw.repaint();
-                
                 //drawArray();
             }
         }
