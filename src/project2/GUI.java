@@ -176,6 +176,8 @@ public class GUI extends JFrame {
             }
             else if (source == buttonHeap) {
                 // heapsort
+                (new HeapSortThread(array, panelDraw)).execute();
+                panelDraw.repaint();
             }
             else if (source == buttonQuick) {
                 // quicksort
