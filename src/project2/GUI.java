@@ -25,6 +25,10 @@ import javax.swing.SwingWorker;
  * @author daniel-ault
  */
 public class GUI extends JFrame {
+    // if this is true, then it will draw each bar with a hue based on the 
+    // value the bar represents
+    private boolean DRAW_COLORS = true;
+    
     private final int ARRAY_SIZE = 100;
     
     private PanelDraw panelDraw = new PanelDraw();
@@ -131,8 +135,13 @@ public class GUI extends JFrame {
 
         private void drawBar(int n, Graphics2D g)
         {
+            Color c;
+            if (DRAW_COLORS)
+                c = Color.getHSBColor(array[n]/100.0f, 1.0f, 1.0f);
+            else 
+                c = Color.BLUE;
             //fill color
-            g.setColor(Color.BLUE);
+            g.setColor(c);
             g.fillRect(n*4, ARRAY_SIZE*4-array[n]*4, 4, array[n]*4);
             //draw black outline
             g.setColor(Color.BLACK);
