@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 public class GUI extends JFrame {
     private final int ARRAY_SIZE = 100;
     
-    private Pixel[][] pixels = new Pixel[ARRAY_SIZE][ARRAY_SIZE];
+    //private Pixel[][] pixels = new Pixel[ARRAY_SIZE][ARRAY_SIZE];
     private JButton buttonBubble = new JButton("Bubble Sort");
     private JButton buttonSelection = new JButton("Selection Sort");
     private JButton buttonInsertion = new JButton("Insertion Sort");
@@ -67,16 +67,6 @@ public class GUI extends JFrame {
         JPanel c = new JPanel();
         c.setLayout(new BorderLayout());
         
-        // create the pixel objects, and add them to a pixelContainer
-        JPanel pixelContainer = new JPanel();
-        pixelContainer.setLayout(new GridLayout(pixels.length, pixels[0].length));
-        for (int i=0; i<pixels.length; i++) {
-            for (int j=0; j<pixels[i].length; j++) {
-                pixels[i][j] = new Pixel();
-                pixelContainer.add(pixels[i][j]);
-            }// end for j
-        }// end for i
-        
         JPanel buttonContainer = new JPanel();
         buttonContainer.setLayout(new GridLayout(3, 3));
         buttonContainer.add(buttonBubble);
@@ -91,35 +81,13 @@ public class GUI extends JFrame {
         
         // add the elements to the content pane
         c.add(buttonContainer, BorderLayout.SOUTH);
-        c.add(pixelContainer, BorderLayout.CENTER);
         c.add(labelTop, BorderLayout.NORTH);
         
         //draw the list
-        drawArray();
+        //drawArray();
         
         setContentPane(c);
         setVisible(true);
-    }
-    
-    
-    private void drawArray()
-    {
-        for (int i=0; i<ARRAY_SIZE; i++) {
-            drawBar(i);
-        }
-    }
-    
-    private void drawBar(int n)
-    {
-        for (int i=0; i<ARRAY_SIZE; i++) {
-            Color color;
-            if (ARRAY_SIZE-i <= array[n])
-                color = Color.BLACK;
-            else
-                color = Color.WHITE;
-            pixels[i][n].setColor(color);
-            pixels[i][n].repaint();
-        }
     }
     
     private void shuffleArray(int[] a)
@@ -169,7 +137,7 @@ public class GUI extends JFrame {
             }
             else if (source == buttonShuffle) {
                 shuffleArray(array);
-                drawArray();
+                //drawArray();
             }
         }
     }
