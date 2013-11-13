@@ -25,6 +25,13 @@ public abstract class SortThread extends SwingWorker<Void, int[]> {
         this.panelDraw = panelDraw;
     }
     
+    protected void publishDelay() {
+        publish(array);
+        try {
+            Thread.sleep(THREAD_DELAY);
+        } catch (InterruptedException e) { }
+    }
+    
     @Override
     protected abstract Void doInBackground() throws Exception;
     

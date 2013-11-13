@@ -44,10 +44,7 @@ public class BubbleSortThread extends SortThread {
                     array[i] = array[i+1];
                     array[i+1] = temp;
                 }
-                publish(array);
-                try {
-                    Thread.sleep(THREAD_DELAY);
-                } catch (InterruptedException e) { }
+                publishDelay();
             }// end for i
         }// end for j
         

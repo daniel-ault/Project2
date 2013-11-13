@@ -16,13 +16,6 @@ public class HeapSortThread extends SortThread {
         super(array, panelDraw);
     }
     
-    private void publishDelay() {
-        publish(array);
-        try {
-            Thread.sleep(THREAD_DELAY);
-        } catch (InterruptedException e) { }
-    }
-    
     @Override
     protected Void doInBackground() throws Exception {
         // go through the array elements at indices 1, 2, 3, ..., placing each one into the max-heap
