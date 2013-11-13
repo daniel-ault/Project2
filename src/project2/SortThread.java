@@ -27,4 +27,10 @@ public abstract class SortThread extends SwingWorker<Void, int[]> {
     
     @Override
     protected abstract Void doInBackground() throws Exception;
+    
+    protected void process(java.util.List<int[]> list)
+    {
+        //tf.setText("" + list.get(list.size() - 1));
+        panelDraw.repaint();
+    }
 }

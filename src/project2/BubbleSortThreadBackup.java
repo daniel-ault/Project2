@@ -13,10 +13,22 @@ import project2.GUI.PanelDraw;
  *
  * @author daniel-ault
  */
-public class BubbleSortThread extends SortThread {
-    public BubbleSortThread(int[] array, PanelDraw panelDraw) 
+public class BubbleSortThreadBackup extends SwingWorker<Void, int[]> {
+    
+    int[] array;
+    static final int THREAD_DELAY = 5;
+    
+    private PanelDraw panelDraw;
+    
+    public BubbleSortThreadBackup(int[] array, PanelDraw panelDraw) 
     {
-        super(array, panelDraw);
+        this.array = array;
+        this.panelDraw = panelDraw;
+    }
+    
+    public void bubbleSort(int[] array)
+    {
+        
     }
 
     @Override
@@ -52,5 +64,15 @@ public class BubbleSortThread extends SortThread {
         }// end for j
         
         return null;
+    }
+    
+    /**
+     *
+     * @param list
+     */
+    protected void process(java.util.List<int[]> list)
+    {
+        //tf.setText("" + list.get(list.size() - 1));
+        panelDraw.repaint();
     }
 }
