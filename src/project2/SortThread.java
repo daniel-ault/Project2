@@ -15,7 +15,7 @@ import project2.GUI.PanelDraw;
  */
 public abstract class SortThread extends SwingWorker<Void, int[]> {
     int[] array;
-    static final int THREAD_DELAY = 5;
+    static final int THREAD_DELAY = 50;
     
     private PanelDraw panelDraw;
     

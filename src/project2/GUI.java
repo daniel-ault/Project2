@@ -173,6 +173,8 @@ public class GUI extends JFrame {
             }
             else if (source == buttonMerge) {
                 // merge sort
+                (new MergeSortThread(array, panelDraw)).execute();
+                panelDraw.repaint();
             }
             else if (source == buttonHeap) {
                 // heapsort
