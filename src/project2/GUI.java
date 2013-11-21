@@ -218,19 +218,19 @@ public class GUI extends JFrame {
             }
             else if (button == buttonSelection) {
                 // selection sort
-                
+                currentSortThread = new SelectionSortThread(array, panelDraw);
                 button.setText("Cancel");
                 button.setEnabled(true);
             }
             else if (button == buttonInsertion) {
                 // insertion sort
-                
+                currentSortThread = new InsertionSortThread(array, panelDraw);
                 button.setText("Cancel");
                 button.setEnabled(true);
             }
             else if (button == buttonShell) {
                 // shell sort
-                
+                currentSortThread = new ShellSortThread(array, panelDraw);
                 button.setText("Cancel");
                 button.setEnabled(true);
             }
@@ -283,62 +283,7 @@ public class GUI extends JFrame {
     }
     
     
-    /*
-    private class BubbleSortThread extends SwingWorker<Void, int[]> {
     
-        //int[] array;
-        static final int THREAD_DELAY = 5;
-
-        //private PanelDraw panelDraw;
-        /*
-        public BubbleSortThread(int[] array, PanelDraw panelDraw) 
-        {
-            this.array = array;
-            this.panelDraw = panelDraw;
-        }
-
-        public void bubbleSort(int[] array)
-        {
-
-        }
-        */
-    /*
-        @Override
-        protected Void doInBackground() throws Exception {
-            // perform array.length passes through the array
-            for (int j = 0; j < array.length; j++) {
-                    // for each pass, compare elements 0 and 1, 1 and 2, 2 and 3, etc., swapping them
-                    //  if the value at the smaller index is bigger
-                    // each pass "bubbles up" the largest element to the end of the array
-                for (int i = 0; i < array.length - 1; i++) {
-                    if (array[i] > array[i+1]) {
-                        int temp = array[i];
-                        array[i] = array[i+1];
-                        array[i+1] = temp;
-                    }
-                    publish(array);
-                    try {
-                        Thread.sleep(THREAD_DELAY);
-                    } catch (InterruptedException e) { }
-                }// end for i
-            }// end for j
-
-            return null;
-        }
-
-        /**
-         *
-         * @param list
-         */
-    /*
-        protected void process(java.util.List<int[]> list)
-        {
-            //tf.setText("" + list.get(list.size() - 1));
-            //array = list.get(list.size() - 1);
-            panelDraw.repaint();
-        }
-    }
-*/
     
     public static void main(String[] args)
     {
