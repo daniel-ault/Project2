@@ -23,7 +23,7 @@ public class BubbleSortThread extends SortThread {
     protected Void doInBackground() throws Exception {
         boolean isSorted = true;
         // check if the array is already sorted
-        for (int i=1; i<array.length; i++) {
+        for (int i=1; !isCancelled() && i<array.length; i++) {
             if (array[i]<array[i-1]) {
                 isSorted = false;
                 break;
@@ -34,11 +34,11 @@ public class BubbleSortThread extends SortThread {
             return null;
         
         // perform array.length passes through the array
-        for (int j = 0; j < array.length; j++) {
+        for (int j = 0; !isCancelled() && j < array.length; j++) {
                 // for each pass, compare elements 0 and 1, 1 and 2, 2 and 3, etc., swapping them
                 //  if the value at the smaller index is bigger
                 // each pass "bubbles up" the largest element to the end of the array
-            for (int i = 0; i < array.length - 1 - j; i++) {
+            for (int i = 0; !isCancelled() &&i < array.length - 1 - j; i++) {
                 if (array[i] > array[i+1]) {
                     int temp = array[i];
                     array[i] = array[i+1];
@@ -46,6 +46,7 @@ public class BubbleSortThread extends SortThread {
                 }
                 publishDelay();
             }// end for i
+            
         }// end for j
         
         return null;

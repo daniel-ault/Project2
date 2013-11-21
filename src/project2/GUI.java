@@ -31,6 +31,9 @@ public class GUI extends JFrame {
     
     private final int ARRAY_SIZE = 100;
     
+    private boolean isSorting = false;
+    private SortThread currentSortThread;
+    
     private PanelDraw panelDraw = new PanelDraw();
     //private Pixel[][] pixels = new Pixel[ARRAY_SIZE][ARRAY_SIZE];
     private JButton buttonBubble = new JButton("Bubble Sort");
@@ -157,42 +160,119 @@ public class GUI extends JFrame {
             // figure out which button fired the ActionEvent
             Object source = e.getSource();
             
-            if (source == buttonBubble) {
-                // bubble sort
-                (new BubbleSortThread(array, panelDraw)).execute();
-                panelDraw.repaint();
-            }
-            else if (source == buttonSelection) {
-                // selection sort
-            }
-            else if (source == buttonInsertion) {
-                // insertion sort
-            }
-            else if (source == buttonShell) {
-                // shell sort
-            }
-            else if (source == buttonMerge) {
-                // merge sort
-                (new MergeSortThread(array, panelDraw)).execute();
-                panelDraw.repaint();
-            }
-            else if (source == buttonHeap) {
-                // heapsort
-                (new HeapSortThread(array, panelDraw)).execute();
-                panelDraw.repaint();
-            }
-            else if (source == buttonQuick) {
-                // quicksort
-            }
-            else if (source == buttonMonkey) {
-                // monkey sort
-            }
-            else if (source == buttonShuffle) {
+            if (source == buttonShuffle) {
                 shuffleArray(array);
                 panelDraw.repaint();
-                //drawArray();
             }
+            // if it is sorting, then the only active button is the cancel
+            else if (isSorting) {
+                cancelSort((JButton)source);
+            }
+            else {
+                startSort((JButton)source);
+            }
+        }// actionPerformed
+        
+        private void cancelSort(JButton button) {
+            isSorting = false;
+            if (currentSortThread != null)
+                currentSortThread.cancel(true);
+            currentSortThread = null;
+            setEnabledAllButtons(true);
+            if (button == buttonBubble) {
+                button.setText("Bubble Sort");
+            }
+            else if (button == buttonSelection) {
+                button.setText("Selection Sort");
+            }
+            else if (button == buttonInsertion) {
+                button.setText("Insertion Sort");
+            }
+            else if (button == buttonShell) {
+                button.setText("Shell Sort");
+            }
+            else if (button == buttonMerge) {
+                button.setText("Merge Sort");
+            }
+            else if (button == buttonHeap) {
+                button.setText("Heapsort");
+            }
+            else if (button == buttonQuick) {
+                button.setText("Quicksort");
+            }
+            else if (button == buttonMonkey) {
+                button.setText("Monkey Sort");
+            }
+        }// cancelSort
+        
+        private void startSort(JButton button) {
+            isSorting = true;
+            
+            setEnabledAllButtons(false);
+
+            if (button == buttonBubble) {
+                // bubble sort
+                currentSortThread = new BubbleSortThread(array, panelDraw);
+                button.setText("Cancel");
+                button.setEnabled(true);
+            }
+            else if (button == buttonSelection) {
+                // selection sort
+                
+                button.setText("Cancel");
+                button.setEnabled(true);
+            }
+            else if (button == buttonInsertion) {
+                // insertion sort
+                
+                button.setText("Cancel");
+                button.setEnabled(true);
+            }
+            else if (button == buttonShell) {
+                // shell sort
+                
+                button.setText("Cancel");
+                button.setEnabled(true);
+            }
+            else if (button == buttonMerge) {
+                // merge sort
+                currentSortThread = new MergeSortThread(array, panelDraw);
+                button.setText("Cancel");
+                button.setEnabled(true);
+            }
+            else if (button == buttonHeap) {
+                // heapsort
+                currentSortThread = new HeapSortThread(array, panelDraw);
+                button.setText("Cancel");
+                button.setEnabled(true);
+            }
+            else if (button == buttonQuick) {
+                // quicksort
+                
+                button.setText("Cancel");
+                button.setEnabled(true);
+            }
+            else if (button == buttonMonkey) {
+                // monkey sort
+                
+                button.setText("Cancel");
+                button.setEnabled(true);
+            }
+            if (currentSortThread != null)
+                currentSortThread.execute();
         }
+    }// ButtonHandler
+    
+    private void setEnabledAllButtons(boolean setTo) {
+        buttonBubble.setEnabled(setTo);
+        buttonSelection.setEnabled(setTo);
+        buttonInsertion.setEnabled(setTo);
+        buttonShell.setEnabled(setTo);
+        buttonMerge.setEnabled(setTo);
+        buttonHeap.setEnabled(setTo);
+        buttonQuick.setEnabled(setTo);
+        buttonMonkey.setEnabled(setTo);
+        buttonShuffle.setEnabled(setTo);
     }
     
     public void printSize() {

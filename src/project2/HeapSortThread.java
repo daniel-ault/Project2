@@ -19,10 +19,10 @@ public class HeapSortThread extends SortThread {
     @Override
     protected Void doInBackground() throws Exception {
         // go through the array elements at indices 1, 2, 3, ..., placing each one into the max-heap
-        for (int i = 1; i < array.length; i++) {
+        for (int i = 1; !isCancelled() && i < array.length; i++) {
             int cIndex = i, pIndex = (cIndex - 1)/2;
 
-            while (cIndex > 0 && array[cIndex] > array[pIndex]) {
+            while (!isCancelled() && cIndex > 0 && array[cIndex] > array[pIndex]) {
                 int temp = array[cIndex];
                 array[cIndex] = array[pIndex];
                 publishDelay();
@@ -37,7 +37,7 @@ public class HeapSortThread extends SortThread {
         }
 
         // now repeatedly remove the top element from the max-heap, placing it at the end of the array
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; !isCancelled() &&i < array.length; i++) {
 
             // swap root with last element in the array
             int topHeapElement = array[0];
@@ -49,7 +49,7 @@ public class HeapSortThread extends SortThread {
             
             // work our way back down the heap, swapping as necessary
             int pIndex = 0;
-            while (true) {
+            while (!isCancelled()) {
                 // check for left child
                 int lIndex = 2*pIndex + 1;
                 if (lIndex >= array.length - 1 - i)		// no left child
@@ -63,7 +63,7 @@ public class HeapSortThread extends SortThread {
                     cIndex = rIndex;
 
                 // check if parent is less than greater child, swap if so
-                if (array[pIndex] < array[cIndex]) {
+                if (array[pIndex] < array[cIndex] && !isCancelled()) {
                     int temp = array[cIndex];
                     array[cIndex] = array[pIndex];
                     publishDelay();

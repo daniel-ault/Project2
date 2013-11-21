@@ -27,14 +27,21 @@ public class MergeSortThread extends SortThread {
     private void mergeSort(int[] a, int start, int end, String s)
     {
         System.out.println(s + "calling mergeSort(" + start + ", " + end + ")");
+        
+        if (isCancelled()) {
+            System.out.println("Merge Sort cancelled by user.");
+        }
         // base case is when start/end are the same -- in this case there's only one element, so no action is needed
-        if (end - start > 0) {
+        else if (end - start > 0) {
             // find the middle index
             int mid = (start + end) / 2;
 
             // sort each half
             mergeSort(a, start, mid, s + " ");
             mergeSort(a, mid + 1, end, s + " ");
+            
+            if (isCancelled())
+                return;
 
             // now merge the two sorted halves together!
             System.out.println(s + " merging between " + start + " and " + end);
@@ -44,7 +51,7 @@ public class MergeSortThread extends SortThread {
 
             // i tracks the position in the left half, j tracks position in right half, k tracks position in merged array
             int i = start, j = mid + 1, k = 0;
-            while (i <= mid && j <= end) {
+            while (i <= mid && j <= end && !isCancelled()) {
                 if (a[i] < a[j])
                     temp[k++] = a[i++];
                 else
