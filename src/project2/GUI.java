@@ -107,7 +107,7 @@ public class GUI extends JFrame {
         // add the elements to the content pane
         c.add(buttonContainer, BorderLayout.SOUTH);
         c.add(panelDraw, BorderLayout.CENTER);
-        c.add(checkBoxColor, BorderLayout.NORTH);
+        c.add(topContainer, BorderLayout.NORTH);
         
         //draw the list
         //drawArray();
