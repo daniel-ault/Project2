@@ -32,8 +32,9 @@ public class SelectionSortThread extends SortThread {
                 if (array[i] < min) {
                     min = array[i];
                     minIndex = i;
+                    publishDelay();
                 }
-                publishDelay();
+                
             }
 
             // swap that minimum element with index j

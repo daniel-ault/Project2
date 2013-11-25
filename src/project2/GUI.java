@@ -248,13 +248,13 @@ public class GUI extends JFrame {
             }
             else if (button == buttonQuick) {
                 // quicksort
-                
+                currentSortThread = new QuickSortThread(array, panelDraw);
                 button.setText("Cancel");
                 button.setEnabled(true);
             }
             else if (button == buttonMonkey) {
                 // monkey sort
-                
+                currentSortThread = new MonkeySortThread(array, panelDraw);
                 button.setText("Cancel");
                 button.setEnabled(true);
             }
