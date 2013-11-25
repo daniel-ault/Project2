@@ -61,7 +61,7 @@ public class GUI extends JFrame {
         
         setTitle("All sorts of sorts");
         // this size allows all the pixels to be 4x4 -- at least in linux
-        setSize(405, 528);
+        setSize(405, 542);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -107,7 +107,7 @@ public class GUI extends JFrame {
         // add the elements to the content pane
         c.add(buttonContainer, BorderLayout.SOUTH);
         c.add(panelDraw, BorderLayout.CENTER);
-        c.add(topContainer, BorderLayout.NORTH);
+        c.add(checkBoxColor, BorderLayout.NORTH);
         
         //draw the list
         //drawArray();
@@ -177,6 +177,7 @@ public class GUI extends JFrame {
             else if (source == buttonShuffle) {
                 shuffleArray(array);
                 panelDraw.repaint();
+                printSize();
             }
             // if it is sorting, then the only active button is the cancel
             else if (isSorting) {
