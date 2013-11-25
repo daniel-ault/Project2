@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,6 +48,8 @@ public class GUI extends JFrame {
     private JButton buttonShuffle = new JButton("Shuffle");
     private JButton buttonCancel = new JButton("Cancel");
     
+    private JCheckBox checkBoxColor = new JCheckBox("Colors");
+    
     int[] array = new int[ARRAY_SIZE];
     
     private JLabel labelTop = new JLabel("woot");
@@ -73,6 +76,9 @@ public class GUI extends JFrame {
         buttonMonkey.addActionListener(bh);
         buttonShuffle.addActionListener(bh);
         
+        checkBoxColor.setSelected(true);
+        checkBoxColor.addActionListener(bh);
+        
         
         // adding the GUI elements to a JPanel object,
         // which will become the "content pane" of the JFrame
@@ -94,10 +100,14 @@ public class GUI extends JFrame {
         buttonContainer.add(buttonMonkey);
         buttonContainer.add(buttonShuffle);
         
+        JPanel topContainer = new JPanel();
+        //topContainer.add(labelTop);
+        topContainer.add(checkBoxColor);
+        
         // add the elements to the content pane
         c.add(buttonContainer, BorderLayout.SOUTH);
         c.add(panelDraw, BorderLayout.CENTER);
-        c.add(labelTop, BorderLayout.NORTH);
+        c.add(topContainer, BorderLayout.NORTH);
         
         //draw the list
         //drawArray();
@@ -160,7 +170,11 @@ public class GUI extends JFrame {
             // figure out which button fired the ActionEvent
             Object source = e.getSource();
             
-            if (source == buttonShuffle) {
+            if (source == checkBoxColor) {
+                DRAW_COLORS = !DRAW_COLORS;
+                panelDraw.repaint();
+            }
+            else if (source == buttonShuffle) {
                 shuffleArray(array);
                 panelDraw.repaint();
             }
